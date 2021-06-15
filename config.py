@@ -9,4 +9,4 @@ largeur_lim = 21e-2
 hauteur_lim = 29e-2
 rayonH = 3e-3
 rayonV = 5e-3
-file_name = "Speckle LI3.pdf"
+file_name = "/Users/yvan/Desktop/ETS_montreal/Cours/E21/MTR892/Speckle LI3.pdf"
