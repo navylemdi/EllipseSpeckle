@@ -10,12 +10,16 @@ import matplotlib.pyplot as plt
 import numpy.random as rnd
 import config
 
+##--------------------------------FONCTIONS----------------------------------##
 def generate_ellipse_by_angles(t, C, a, b, theta, phi):
     n = np.array([np.cos(phi)*np.sin(theta), np.sin(phi)*np.sin(theta), np.cos(theta)])
     u = np.array([-np.sin(phi), np.cos(phi), 0])
     P_ellipse = a*np.cos(t)[:, np.newaxis]*u + b*np.sin(t)[:, np.newaxis]*np.cross(n, u) + C
     return P_ellipse
 
+##------------------------------FIN FONCTIONS--------------------------------##
+
+##-------------------------------CONSTANTES----------------------------------##
 
 largeur_lim = config.largeur_lim
 hauteur_lim = config.hauteur_lim
@@ -23,12 +27,17 @@ theta = np.pi*90/180
 phi = 0
 rayonH = config.rayonH
 rayonV = config.rayonV
+ecartH = config.ecartH
 nbrows = int(hauteur_lim/(4*rayonV))
-nbcolumns = int(largeur_lim/(2*rayonH))-4
+nbcolumns = int((largeur_lim-ecartH)/((2*rayonH)+ecartH))
 nbelem = nbrows*nbcolumns
 
 t = np.linspace(0, 2*np.pi, 50)
 P_gen = np.zeros((nbelem, len(t), 3))
+
+##------------------------------FIN CONSTANTES-------------------------------##
+
+##--------------------------------ELLIPSES-----------------------------------##
 
 #Creation du quadrillage
 pos = np.zeros((nbelem, 3))
@@ -44,8 +53,11 @@ for l in range(nbrows):
 e=np.zeros((nbelem, len(t), 3))
 for i in range(nbelem):
     e[i]=generate_ellipse_by_angles(t, pos[i], rayonH, rayonV*(1+rnd.rand()), theta, phi)
+    
+##------------------------------FIN ELLIPSES---------------------------------##
 
-#Affichage
+##--------------------------------AFFICHAGE----------------------------------##
+
 fig = plt.figure(1)
 fig.set_size_inches(21/2.54, 29.7/2.54)
 
@@ -64,3 +76,4 @@ plt.box(False)
 plt.show()
 
 fig.savefig(config.file_name, bbox_inches='tight')
+##----------------------------FIN AFFICHAGE----------------------------------##
