@@ -28,8 +28,8 @@ phi = 0
 rayonH = config.rayonH
 rayonV = config.rayonV
 ecartH = config.ecartH
-nbrows = int(hauteur_lim/(4*rayonV))
-nbcolumns = int((largeur_lim-ecartH)/((2*rayonH)+ecartH))
+nbrows = int( (hauteur_lim-0.5e-3)/(4*rayonV+0.5e-3) )
+nbcolumns = int( (largeur_lim-ecartH)/(2*rayonH+ecartH) )
 nbelem = nbrows*nbcolumns
 
 t = np.linspace(0, 2*np.pi, 50)
@@ -59,7 +59,7 @@ for i in range(nbelem):
 ##--------------------------------AFFICHAGE----------------------------------##
 
 fig = plt.figure(1)
-fig.set_size_inches(21/2.54, 29.7/2.54)
+fig.set_size_inches(largeur_lim/0.0254, hauteur_lim/0.0254)
 
 ax = fig.add_subplot(111, aspect='equal')
 axe = plt.gca()
@@ -72,6 +72,8 @@ y_axis.set_visible(False)
 for i in range(nbelem):
     plt.plot(e[i, :, 1], e[i, :, 2], color='black')
     ax.fill(e[i, :, 1], e[i, :, 2], 'k',zorder=10)
+plt.xlim(0-rayonH*2, largeur_lim)
+plt.ylim(0-2*rayonV, hauteur_lim)
 plt.box(False)
 plt.show()
 
