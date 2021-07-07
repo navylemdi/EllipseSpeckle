@@ -58,8 +58,8 @@ for i in range(nbelem):
 
 ##--------------------------------AFFICHAGE----------------------------------##
 
-fig = plt.figure(1)
-fig.set_size_inches(largeur_lim/0.0254, hauteur_lim/0.0254)
+fig = plt.figure(1, figsize=(largeur_lim/0.0254, hauteur_lim/0.0254))
+#fig.set_size_inches(largeur_lim/0.0254, hauteur_lim/0.0254)
 
 ax = fig.add_subplot(111, aspect='equal')
 axe = plt.gca()
@@ -76,6 +76,6 @@ plt.xlim(0-rayonH*2, largeur_lim)
 plt.ylim(0-2*rayonV, hauteur_lim)
 plt.box(False)
 plt.show()
-
-fig.savefig(config.file_name, bbox_inches='tight')
+fig.tight_layout()
+fig.savefig(config.file_name)
 ##----------------------------FIN AFFICHAGE----------------------------------##
